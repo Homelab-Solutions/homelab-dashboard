@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CommunityApplications>
   <Profile>AppFactory-Projekt: Homelab-Startseite mit Kachel-Lesezeichen, Mehrbenutzer-Login und optionaler MariaDB-Anbindung.</Profile>
-  <Icon>https://github.com/homelabappfactory.png</Icon>
-  <WebPage>https://github.com/homelabappfactory</WebPage>
+  <Icon>https://github.com/homelab-solutions.png</Icon>
+  <WebPage>https://github.com/homelab-solutions</WebPage>
 </CommunityApplications>

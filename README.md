@@ -173,7 +173,7 @@ Vorbereitung fuer eine spaetere Veroeffentlichung als Container-Image (Stand 202
 |---|---|
 | `Dockerfile` | Image: `node:20-alpine`, `npm ci --omit=dev` (Lockfile), Benutzer `node` (uid 1000), `HEALTHCHECK`, Volume `/app/data` |
 | `.dockerignore` | Build-Kontext als Positivliste (nur `package*.json`, `server`, `public`); nie `.env*`, `data`, `*.sql`, `*.bak`, `node_modules`, Schluessel |
-| `.github/workflows/release-image.yml` | Release-Workflow (aus der AppFactory-Vorlage): startet **nur** beim Push eines Tags `vX.Y.Z` (muss zur `package.json`-Version passen), baut `linux/amd64` und pusht `ghcr.io/homelabappfactory/homelab_dashboard:<tag>` plus `latest`; Rechte `contents: read`, `packages: write`. Es existiert noch kein Repository und es wurde nichts gebaut oder veroeffentlicht |
+| `.github/workflows/release-image.yml` | Release-Workflow (aus der AppFactory-Vorlage): startet **nur** beim Push eines Tags `vX.Y.Z` (muss zur `package.json`-Version passen), baut `linux/amd64` und pusht `ghcr.io/homelab-solutions/homelab-dashboard:<tag>` plus `latest`; Rechte `contents: read`, `packages: write` |
 | `docker-compose.unraid.yml` | Container-Fassung: baut aus dem `Dockerfile`, Port `3002`, `./data:/app/data`, `env_file: .env` |
 | `docker-compose.yml` | Entwicklungs-/AppFactory-Fassung (Node-Image mit Bind-Mount, laeuft als root, wird von der AppFactory fuer den laufenden Betrieb genutzt); **nicht** fuer ein Release-Image gedacht |
 | `docker-compose.appfactory.yml`, `docker-compose.yml.bak` | Kopie bzw. alte Sicherung der Entwicklungsfassung; unveraendert, nicht loeschen |

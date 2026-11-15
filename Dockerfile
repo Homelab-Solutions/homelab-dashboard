@@ -4,7 +4,7 @@
 FROM node:22-alpine
 
 # Vorgesehenes Ziel (Konto aus den AppFactory-Einstellungen, Repository-Name = Projekt-Slug); bei anderem Ziel anpassen.
-LABEL org.opencontainers.image.source="https://github.com/homelabappfactory/homelab-dashboard"
+LABEL org.opencontainers.image.source="https://github.com/homelab-solutions/homelab-dashboard"
 
 WORKDIR /app
 

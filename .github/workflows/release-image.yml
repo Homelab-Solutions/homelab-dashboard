@@ -1,6 +1,6 @@
 # AppFactory - Image-Vorlage: Release-Workflow (wird im Projekt zu ".github/workflows/release-image.yml").
 # Startet NUR beim Push eines Versions-Tags vMAJOR.MINOR.PATCH, nie bei Pull Requests oder Branch-Pushes. Das Setzen des Tags ist die
-# Freigabe der Veroeffentlichung: nur geprueften Commit taggen. Platzhalter (Kleinschreibung): homelabappfactory = GitHub-Konto aus den
+# Freigabe der Veroeffentlichung: nur geprueften Commit taggen. Platzhalter (Kleinschreibung): homelab-solutions = GitHub-Konto aus den
 # AppFactory-Einstellungen, homelab-dashboard = Projekt-Slug (= Repository-Name). Rechte laut GitHub-Dokumentation: contents lesen,
 # packages schreiben (alle nicht genannten Rechte sind dann "none"). Plattform vorerst nur linux/amd64.
 name: release-image
@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      IMAGE: ghcr.io/homelabappfactory/homelab-dashboard
-      EXPECTED_REPO: homelabappfactory/homelab-dashboard
+      IMAGE: ghcr.io/homelab-solutions/homelab-dashboard
+      EXPECTED_REPO: homelab-solutions/homelab-dashboard
     steps:
       - name: Tag und Ziel pruefen
         env:
