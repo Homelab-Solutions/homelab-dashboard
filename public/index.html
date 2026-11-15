@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Homelab Dashboard</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body class="tile-size-medium">
+    <!-- Hintergrundbild-Ebene (wird aus den Einstellungen gefuellt) -->
+    <div id="bgLayer"></div>
+
+    <div class="app-shell">
+      <!-- Senkrechte Toolbar links unten - Inhalt kommt aus js/app.js -->
+      <nav class="toolbar" id="toolbar" aria-label="Hauptnavigation"></nav>
+
+      <!-- Einstellbar transparenter Body-Frame -->
+      <main class="frame" id="view">
+        <div class="empty"><p>Dashboard wird geladen ...</p></div>
+      </main>
+    </div>
+
+    <div id="toasts" aria-live="polite"></div>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

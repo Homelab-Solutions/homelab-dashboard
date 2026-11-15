@@ -1,0 +1,9 @@
+{
+  "title_de": "Homelab Dashboard",
+  "title_en": "Homelab Dashboard",
+  "summary_de": "Startseite fürs Heimnetz: Lesezeichen als Kacheln mit Suche, Tags, Mehrbenutzer-Login und anpassbarem Design.",
+  "summary_en": "Start page for your home network: bookmarks as tiles with search, tags, multi-user login and customisable design.",
+  "description_de": "Das Homelab Dashboard sammelt alle Dienste deines Heimnetzes als farbige Kacheln auf einer Seite. Eine Suchleiste filtert beim Tippen, Tags gruppieren die Anwendungen, und die Kacheln lassen sich als Raster oder frei im Raum anordnen.\n\nDesign (hell oder dunkel, Akzentfarbe, Hintergrundbild), Suchmaschine und Verhalten sind einstellbar. Mehrere Benutzer melden sich an, Administratoren verwalten Konten, Sicherung und Wiederherstellung. Lesezeichen lassen sich als JSON importieren und exportieren; Icons holt die App auf Wunsch automatisch von der Zielseite.\n\nDaten liegen in MariaDB oder wahlweise in einer Datei; die App läuft als Docker-Container.",
+  "description_en": "The Homelab Dashboard collects all services of your home network as colourful tiles on one page. A search bar filters as you type, tags group the applications and the tiles can be arranged in a grid or freely in space.\n\nDesign (light or dark, accent colour, background image), search engine and behaviour are configurable. Several users log in, administrators manage accounts, backup and restore. Bookmarks can be imported and exported as JSON; the app can fetch icons from the target site automatically.\n\nData lives in MariaDB or optionally in a file; the app runs as a Docker container.",
+  "tags": ["Dashboard", "Homelab", "Node.js", "MariaDB", "Docker"]
+}

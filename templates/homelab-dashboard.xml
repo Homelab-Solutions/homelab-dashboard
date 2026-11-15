@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Unraid-Template fuer Community Applications (Projekt homelab-dashboard).
+  Erstellt aus der AppFactory-Vorlage; Kategorie vom AppFactory-Betreiber gewaehlt (Tools:Utilities, die einzige in den
+  offiziellen Hilfeseiten belegte Kategorie); Pruefung im CA-Portal (Validate und Scan) bleibt verbindlich.
+-->
+<Container version="2">
+  <Name>Homelab Dashboard</Name>
+  <Repository>ghcr.io/homelabappfactory/homelab-dashboard:latest</Repository>
+  <Registry>https://github.com/homelabappfactory/homelab-dashboard/pkgs/container/homelab-dashboard</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/homelabappfactory/homelab-dashboard/issues</Support>
+  <Project>https://github.com/homelabappfactory/homelab-dashboard</Project>
+  <Overview>Startseite für das Homelab: Lesezeichen als Kacheln, mehrere Benutzer mit Anmeldung und optionale Anbindung an eine MariaDB-Datenbank.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:3002]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/homelabappfactory/homelab-dashboard/main/templates/homelab-dashboard.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/homelabappfactory/homelab-dashboard/main/homelab-dashboard-icon.png</Icon>
+  <Config Name="WebUI-Port" Target="3002" Default="3002" Mode="tcp" Description="Port der Weboberflaeche" Type="Port" Display="always" Required="true" Mask="false">3002</Config>
+  <Config Name="Daten" Target="/app/data" Default="/mnt/user/appdata/homelab-dashboard" Mode="rw" Description="Persistente Daten (Dateispeicher, Sitzungsschluessel)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/homelab-dashboard</Config>
+</Container>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Anmelden - Homelab Dashboard</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div id="bgLayer"></div>
+
+    <div class="login-wrap">
+      <form class="login-card" id="loginForm" autocomplete="on">
+        <div class="login-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+        </div>
+
+        <h1>Homelab Dashboard</h1>
+        <p class="hint">Bitte mit dem Benutzerkonto anmelden.</p>
+
+        <div class="notice notice-error hidden" id="loginError" role="alert"></div>
+
+        <div class="field">
+          <label for="username">Benutzername</label>
+          <input type="text" id="username" name="username" autocomplete="username"
+                 autocapitalize="none" spellcheck="false" required autofocus />
+        </div>
+
+        <div class="field">
+          <label for="password">Passwort</label>
+          <input type="password" id="password" name="password"
+                 autocomplete="current-password" required />
+        </div>
+
+        <button class="btn btn-primary" type="submit" id="loginBtn" style="width:100%">
+          Anmelden
+        </button>
+
+        <p class="hint" style="margin-top:16px">
+          Beim Erststart gelten die Zugangsdaten aus der <code>.env</code>
+          (<code>ADMIN_USER</code> / <code>ADMIN_PASSWORD</code>). Das Passwort muss
+          nach der ersten Anmeldung geaendert werden.
+        </p>
+      </form>
+    </div>
+
+    <div id="toasts" aria-live="polite"></div>
+
+    <script type="module" src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+# Zugangsdaten / Umgebung
+.env
+.env.*
+!.env.example
+
+# Abhaengigkeiten
+node_modules/
+npm-debug.log*
+
+# Laufzeitdaten (Fallback-Storage, Session-Secret, Exporte)
+data/
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Datenbank-Dumps und Sicherungen (nie ins Repository)
+*.sql
+*.bak

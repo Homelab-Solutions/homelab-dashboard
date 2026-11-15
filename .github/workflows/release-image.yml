@@ -1,0 +1,78 @@
+# AppFactory - Image-Vorlage: Release-Workflow (wird im Projekt zu ".github/workflows/release-image.yml").
+# Startet NUR beim Push eines Versions-Tags vMAJOR.MINOR.PATCH, nie bei Pull Requests oder Branch-Pushes. Das Setzen des Tags ist die
+# Freigabe der Veroeffentlichung: nur geprueften Commit taggen. Platzhalter (Kleinschreibung): homelabappfactory = GitHub-Konto aus den
+# AppFactory-Einstellungen, homelab-dashboard = Projekt-Slug (= Repository-Name). Rechte laut GitHub-Dokumentation: contents lesen,
+# packages schreiben (alle nicht genannten Rechte sind dann "none"). Plattform vorerst nur linux/amd64.
+name: release-image
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: release-image-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      IMAGE: ghcr.io/homelabappfactory/homelab-dashboard
+      EXPECTED_REPO: homelabappfactory/homelab-dashboard
+    steps:
+      - name: Tag und Ziel pruefen
+        env:
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || { echo "Der Tag entspricht nicht vMAJOR.MINOR.PATCH."; exit 1; }
+          [ "${REPO,,}" = "$EXPECTED_REPO" ] || { echo "Dieses Repository ist nicht das vorgesehene Ziel; es wird nichts veroeffentlicht."; exit 1; }
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Version mit package.json abgleichen
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          ver=$(grep -m1 '"version"' package.json | sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/')
+          [ "v$ver" = "$TAG" ] || { echo "Tag und package.json-Version stimmen nicht ueberein."; exit 1; }
+
+      - name: Image bauen (linux/amd64)
+        env:
+          TAG: ${{ github.ref_name }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          docker build --pull --platform linux/amd64 \
+            --label "org.opencontainers.image.version=${TAG#v}" \
+            --label "org.opencontainers.image.revision=$COMMIT" \
+            --tag "$IMAGE:$TAG" --tag "$IMAGE:latest" .
+
+      - name: Anmelden und veroeffentlichen
+        env:
+          TAG: ${{ github.ref_name }}
+          COMMIT: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$ACTOR" --password-stdin
+          docker push "$IMAGE:$TAG"
+          docker push "$IMAGE:latest"
+          digest=$(docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE:$TAG")
+          {
+            echo "### Image veroeffentlicht"
+            echo "- Tag: \`$TAG\` (ergaenzend \`latest\`)"
+            echo "- Commit: \`$COMMIT\`"
+            echo "- Digest: \`$digest\`"
+          } >> "$GITHUB_STEP_SUMMARY"

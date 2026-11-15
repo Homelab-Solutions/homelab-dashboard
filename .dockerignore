@@ -1,0 +1,16 @@
+# Build-Kontext als Positivliste: alles ausschliessen, nur Benoetigtes zulassen (Dockerfile kopiert nur diese Pfade).
+*
+!package.json
+!package-lock.json
+!server
+!public
+# Auch innerhalb der zugelassenen Ordner nie in das Image
+**/.env*
+**/data
+**/node_modules
+**/*.sql
+**/*.bak
+**/*.log
+**/*.pem
+**/*.key
+**/credentials*
